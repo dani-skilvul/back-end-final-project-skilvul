@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       // menghapus id dan menggantikan email sebagai primary key
       email: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         primaryKey: true,
       },
       nama: DataTypes.STRING,

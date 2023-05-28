@@ -2,9 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const userRoute = require("./routes/userRoute");
 const db = require("./config/db");
+const dotenv = require("dotenv");
 
 const app = express();
 const port = 3030;
+
+// konfigurasi library
+dotenv.config();
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: false }));

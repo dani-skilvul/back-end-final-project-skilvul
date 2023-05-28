@@ -10,7 +10,8 @@ const registerUserController = async (req, res) => {
       // berikan response error
       return res.status(400).json({
         status: "error",
-        message: "Semua data email, password, dan confPassword harus diisi",
+        message:
+          "Semua data email, nama, password, dan confPassword harus diisi",
       });
     }
 
@@ -19,7 +20,7 @@ const registerUserController = async (req, res) => {
       // berikan reponse error
       return res.status(400).json({
         status: "error",
-        message: "password dan confPassword tidak sama",
+        message: "password dan confPassword harus sama",
       });
     }
 
