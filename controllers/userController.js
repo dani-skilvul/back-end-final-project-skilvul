@@ -1,5 +1,6 @@
 const User = require("../models").User;
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const registerUserController = async (req, res) => {
   try {
@@ -52,9 +53,9 @@ const registerUserController = async (req, res) => {
     await User.create(newUser);
 
     // berikan response success
-    return res.json({
+    return res.staus(201).json({
       status: "success",
-      message: "Berhasil register",
+      message: "Register Berhasil",
       data: {
         email,
       },
@@ -64,4 +65,56 @@ const registerUserController = async (req, res) => {
   }
 };
 
-module.exports = { registerUserController };
+const loginUserController = async (req, res) => {
+  try {
+    // mengambil data dari req.body
+    const { email, password } = req.body;
+
+    // validasi: jika user tidak mengirimkan email dan password
+    if (!email || !password) {
+      // berikan response error
+      return res.status(400).json({
+        status: "error",
+        message: "Semua data email dan password harus diisi",
+      });
+    }
+
+    // validasi: cek user di database berdasarkan email
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!user) {
+      // berikan response error
+      return res.status(404).json({
+        status: "error",
+        message: "Email tidak ditemukan",
+      });
+    }
+
+    // validasi: apakah passwornya = password yang ada di db
+    const cekPassword = await bcrypt.compare(password, user.password);
+    if (!cekPassword) {
+      // berikan response error
+      return res.status(400).json({
+        status: "error",
+        message: "Password tidak valid",
+      });
+    }
+
+    const token = jwt.sign({ email }, process.env.LOGIN_TOKEN_KEY, {
+      expiresIn: "60s",
+    });
+
+    // berikan response success dan token di header
+    return res.header("Authorization", token).json({
+      status: "success",
+      message: "Login Berhasil",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { registerUserController, loginUserController };
