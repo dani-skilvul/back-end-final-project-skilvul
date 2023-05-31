@@ -6,19 +6,18 @@ const addNewsController = async (req, res) => {
     // mengambil data
     const id = nanoid(6);
     const { judul, isi } = req.body;
-    // mendapatkan waktu saat ini di Jakarta
-    const now = new Date();
-    const jakartaOffset = 7; // Jakarta offset: GMT+7
-    const utcOffset = now.getTimezoneOffset() / 60;
-    const jakartaTime = new Date(
-      now.getTime() + (jakartaOffset - utcOffset) * 60 * 60 * 1000
-    );
+    const waktu = new Date();
+    // Periksa apakah file gambar diupload oleh client
+    let gambar = "";
+    if (req.file) {
+      gambar = req.file.path; // Gunakan path file yang diupload
+    }
 
     // validasi: jika user tidak mengirimkan data news lengkap
-    if (!judul || !isi) {
+    if (!judul || !isi || !gambar) {
       return res.status(400).json({
         status: "error",
-        message: "Mohon untuk semua data judul, isi, dan waktu harus diisi",
+        message: "Mohon untuk semua data judul, isi, dan gambar harus diisi",
       });
     }
 
@@ -27,7 +26,8 @@ const addNewsController = async (req, res) => {
       id,
       judul,
       isi,
-      waktu: jakartaTime,
+      gambar,
+      waktu,
     };
 
     // proses insert data

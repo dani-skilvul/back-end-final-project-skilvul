@@ -53,7 +53,7 @@ const registerUserController = async (req, res) => {
     await User.create(newUser);
 
     // berikan response success
-    return res.staus(201).json({
+    return res.status(201).json({
       status: "success",
       message: "Register Berhasil",
       data: {
