@@ -1,5 +1,6 @@
 const News = require("../models").News;
 const { nanoid } = require("nanoid");
+const uploadToImgBB = require("../utils/imageUpload");
 
 const addNewsController = async (req, res) => {
   try {
@@ -7,26 +8,25 @@ const addNewsController = async (req, res) => {
     const id = nanoid(6);
     const { judul, isi } = req.body;
     const waktu = new Date();
-    // Periksa apakah file gambar diupload oleh client
-    let gambar = "";
-    if (req.file) {
-      gambar = req.file.path; // Gunakan path file yang diupload
-    }
+    const gambarPath = req.file.path;
 
     // validasi: jika user tidak mengirimkan data news lengkap
-    if (!judul || !isi || !gambar) {
+    if (!judul || !isi || !gambarPath) {
       return res.status(400).json({
         status: "error",
         message: "Mohon untuk semua data judul, isi, dan gambar harus diisi",
       });
     }
 
+    // kirim gambar ke ImgBB
+    const imageUrl = await uploadToImgBB(gambarPath);
+
     // buat object news
     const news = {
       id,
       judul,
       isi,
-      gambar,
+      gambar: imageUrl,
       waktu,
     };
 
