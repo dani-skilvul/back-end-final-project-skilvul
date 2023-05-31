@@ -1,5 +1,10 @@
 const express = require("express");
-const { addNewsController } = require("../controllers/newsController");
+const {
+  addNewsController,
+  getNewsController,
+  getNewsByIdController,
+  editNewsByIdController,
+} = require("../controllers/newsController");
 const uploadImageMiddleware = require("../middleware/uploadImageMiddleware");
 
 const newsRoute = express.Router();
@@ -9,5 +14,8 @@ newsRoute.post(
   uploadImageMiddleware.single("gambar"),
   addNewsController
 );
+newsRoute.get("/api/news", getNewsController);
+newsRoute.get("/api/news/:id", getNewsByIdController);
+newsRoute.put("/api/news/:id", editNewsByIdController);
 
 module.exports = newsRoute;

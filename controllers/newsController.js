@@ -46,4 +46,106 @@ const addNewsController = async (req, res) => {
   }
 };
 
-module.exports = { addNewsController };
+const getNewsController = async (req, res) => {
+  try {
+    // proses ambil semua data
+    const news = await News.findAll();
+
+    // berikan response success
+    return res.json({
+      status: "success",
+      message: "Berhasil mengambil semua data News",
+      data: {
+        news,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const getNewsByIdController = async (req, res) => {
+  try {
+    // mengambil id dari req.params.id
+    const id = req.params.id;
+
+    // proses mengambil satu data
+    const news = await News.findOne({
+      where: {
+        id,
+      },
+    });
+
+    // validasi jika data yang dicari tidak ada
+    if (!news) {
+      // berikan response error
+      return res.status(404).json({
+        status: "error",
+        message: "Data tidak ditemukan",
+      });
+    }
+
+    // merubah format waktu ke string
+    const formatWaktu = news.waktu.toISOString().slice(0, 19).replace("T", " ");
+
+    // buat object news
+    const objectNews = {
+      id: news.id,
+      judul: news.judul,
+      isi: news.isi,
+      gambar: news.gambar,
+      waktu: formatWaktu,
+    };
+
+    // berikan response success
+    return res.json({
+      status: "success",
+      message: "Berhasil mengambil satu data news",
+      data: {
+        objectNews,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const editNewsByIdController = async (req, res) => {
+  try {
+    // mengambil id dari req.params.id
+    const id = req.params.id;
+    const { judul, isi, gambar } = req.body;
+
+    const newNews = {
+      judul,
+      isi,
+      gambar,
+    };
+
+    // prosess edit
+    await News.update(newNews, {
+      where: {
+        id,
+      },
+    });
+
+    // berikan response success
+    return res.json({
+      status: "success",
+      message: "Data berhasil dirubah",
+    });
+  } catch (error) {}
+};
+
+const deleteNewsByIdController = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+module.exports = {
+  addNewsController,
+  getNewsController,
+  getNewsByIdController,
+  editNewsByIdController,
+  deleteNewsByIdController,
+};
