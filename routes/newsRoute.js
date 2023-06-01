@@ -4,6 +4,7 @@ const {
   getNewsController,
   getNewsByIdController,
   editNewsByIdController,
+  deleteNewsByIdController,
 } = require("../controllers/newsController");
 const uploadImageMiddleware = require("../middleware/uploadImageMiddleware");
 
@@ -21,5 +22,6 @@ newsRoute.put(
   uploadImageMiddleware.single("gambar"),
   editNewsByIdController
 );
+newsRoute.delete("/api/news/:id", deleteNewsByIdController);
 
 module.exports = newsRoute;

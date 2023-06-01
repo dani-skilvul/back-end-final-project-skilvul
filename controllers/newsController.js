@@ -138,7 +138,7 @@ const editNewsByIdController = async (req, res) => {
       // berikan response error
       return res.status(404).json({
         status: "error",
-        message: "Data tidak ditemukan",
+        message: "Data news tidak ditemukan",
       });
     }
 
@@ -168,7 +168,38 @@ const editNewsByIdController = async (req, res) => {
 
 const deleteNewsByIdController = async (req, res) => {
   try {
-  } catch (error) {}
+    // ambil id dari req.params.id
+    const id = req.params.id;
+
+    // validasi: cari data news berdasarkan id
+    const news = await News.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!news) {
+      // berikan response error
+      return res.status(404).json({
+        status: "error",
+        message: "Data news tidak ditemukan",
+      });
+    }
+
+    // proses hapus
+    await News.destroy({
+      where: {
+        id,
+      },
+    });
+
+    // berikan response success
+    return res.json({
+      status: "success",
+      message: "News berhasil dihapus",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {
