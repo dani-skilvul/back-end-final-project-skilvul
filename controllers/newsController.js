@@ -1,13 +1,18 @@
 const News = require("../models").News;
 const { nanoid } = require("nanoid");
 const uploadImageToImgBB = require("../utils/uploadImageToImgBB");
+const dayjs = require("dayjs");
+require("dayjs/locale/id");
 
 const addNewsController = async (req, res) => {
   try {
     // mengambil data
     const id = nanoid(6);
     const { judul, isi } = req.body;
-    const waktu = new Date().toISOString().slice(0, 19).replace("T", " ");
+    // let waktu = new Date().toLocaleString("id-ID", {
+    //   timeZone: "Asia/Jakarta",
+    // });
+    const waktu = dayjs().locale("id").format("DD-MMMM-YYYY HH:mm:ss");
     const gambarPath = req.file ? req.file.path : null;
 
     // validasi: jika user tidak mengirimkan data news lengkap
