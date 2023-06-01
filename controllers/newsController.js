@@ -7,7 +7,7 @@ const addNewsController = async (req, res) => {
     // mengambil data
     const id = nanoid(6);
     const { judul, isi } = req.body;
-    const waktu = new Date();
+    const waktu = new Date().toISOString().slice(0, 19).replace("T", " ");
     const gambarPath = req.file.path;
 
     // validasi: jika user tidak mengirimkan data news lengkap
@@ -85,24 +85,24 @@ const getNewsByIdController = async (req, res) => {
       });
     }
 
-    // merubah format waktu ke string
-    const formatWaktu = news.waktu.toISOString().slice(0, 19).replace("T", " ");
+    // // merubah format waktu ke string
+    // const formatWaktu = news.waktu.toISOString().slice(0, 19).replace("T", " ");
 
-    // buat object news
-    const objectNews = {
-      id: news.id,
-      judul: news.judul,
-      isi: news.isi,
-      gambar: news.gambar,
-      waktu: formatWaktu,
-    };
+    // // buat object news
+    // const objectNews = {
+    //   id: news.id,
+    //   judul: news.judul,
+    //   isi: news.isi,
+    //   gambar: news.gambar,
+    //   waktu: formatWaktu,
+    // };
 
     // berikan response success
     return res.json({
       status: "success",
       message: "Berhasil mengambil satu data news",
       data: {
-        objectNews,
+        news,
       },
     });
   } catch (error) {
@@ -114,12 +114,41 @@ const editNewsByIdController = async (req, res) => {
   try {
     // mengambil id dari req.params.id
     const id = req.params.id;
-    const { judul, isi, gambar } = req.body;
+    // const { judul, isi } = req.body;
+    const judul = req.body.judul;
+    const isi = req.body.isi;
+    const gambarPath = req.file.path;
+
+    // validasi: jika user tidak mengirimkan data secara lengkap
+    if (!judul || !isi || !gambarPath) {
+      // berikan response error
+      return res.status(400).json({
+        status: "error",
+        message: "Mohon untuk semua data judul, isi, dan gambar harus diisi",
+      });
+    }
+
+    // validasi: cek apakah data news ada
+    const news = await News.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!news) {
+      // berikan response error
+      return res.status(404).json({
+        status: "error",
+        message: "Data tidak ditemukan",
+      });
+    }
+
+    // proses upload gambar ke imgbb
+    const imgUrl = await uploadToImgBB(gambarPath);
 
     const newNews = {
       judul,
       isi,
-      gambar,
+      gambar: imgUrl,
     };
 
     // prosess edit

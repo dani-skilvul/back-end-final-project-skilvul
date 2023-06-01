@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       waktu: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
       },
     });
   },

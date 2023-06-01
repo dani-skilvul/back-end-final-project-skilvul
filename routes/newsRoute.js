@@ -16,6 +16,10 @@ newsRoute.post(
 );
 newsRoute.get("/api/news", getNewsController);
 newsRoute.get("/api/news/:id", getNewsByIdController);
-newsRoute.put("/api/news/:id", editNewsByIdController);
+newsRoute.put(
+  "/api/news/:id",
+  uploadImageMiddleware.single("gambar"),
+  editNewsByIdController
+);
 
 module.exports = newsRoute;
