@@ -7,7 +7,7 @@ require("dayjs/locale/id");
 const addNewsController = async (req, res) => {
   try {
     // mengambil data
-    const id = nanoid(6);
+    const id = "news-" + nanoid(4);
     const { judul, isi } = req.body;
     // let waktu = new Date().toLocaleString("id-ID", {
     //   timeZone: "Asia/Jakarta",
@@ -51,7 +51,11 @@ const addNewsController = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    // berikan response error
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
   }
 };
 
@@ -69,7 +73,11 @@ const getNewsController = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    // berikan response error
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
   }
 };
 
@@ -90,21 +98,9 @@ const getNewsByIdController = async (req, res) => {
       // berikan response error
       return res.status(404).json({
         status: "error",
-        message: "Data tidak ditemukan",
+        message: "Data news tidak ditemukan",
       });
     }
-
-    // // merubah format waktu ke string
-    // const formatWaktu = news.waktu.toISOString().slice(0, 19).replace("T", " ");
-
-    // // buat object news
-    // const objectNews = {
-    //   id: news.id,
-    //   judul: news.judul,
-    //   isi: news.isi,
-    //   gambar: news.gambar,
-    //   waktu: formatWaktu,
-    // };
 
     // berikan response success
     return res.json({
@@ -115,65 +111,52 @@ const getNewsByIdController = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    // berikan response error
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
   }
 };
 
 const editNewsByIdController = async (req, res) => {
   try {
-    // mengambil id dari req.params.id
+    // mengambil data dari user
     const id = req.params.id;
     const judul = req.body.judul;
     const isi = req.body.isi;
     const gambarPath = req.file ? req.file.path : null;
 
-    // validasi: jika user tidak mengirimkan data secara lengkap
-    if (!judul || !isi) {
-      // berikan response error
-      return res.status(400).json({
-        status: "error",
-        message: "Mohon untuk semua data judul, dan isi harus diisi",
-      });
-    }
-
-    // validasi: cek apakah data news ada
+    // cek data di db berdasarkan id
     const news = await News.findOne({
       where: {
         id,
       },
     });
+    // validasi: berikan response error, ketika data yang dicari tidak ada
     if (!news) {
-      // berikan response error
       return res.status(404).json({
         status: "error",
         message: "Data news tidak ditemukan",
       });
     }
 
-    let imageUrl = null; // Perubahan disini
-    let newNews = {};
+    let imageUrl = null;
 
-    // validasi: jika user meingirimkan gambar
+    // validasi: jika user mengirimkan gambar
     if (gambarPath) {
       // proses upload gambar ke imgbb
       imageUrl = await uploadImageToImgBB(gambarPath);
-
-      // object News ketika user mengirimkan gambar
-      newNews = {
-        judul,
-        isi,
-        gambar: imageUrl,
-      };
-    } else {
-      // object News ketika user tidak mengirimkan gambar
-      newNews = {
-        judul,
-        isi,
-        gambar: news.gambar,
-      };
     }
 
-    // prosess edit
+    // buat object news baru
+    let newNews = {
+      judul: judul ? judul : news.judul,
+      isi: isi ? isi : news.isi,
+      gambar: imageUrl ? imageUrl : news.gambar,
+    };
+
+    // proses update
     await News.update(newNews, {
       where: {
         id,
@@ -186,7 +169,11 @@ const editNewsByIdController = async (req, res) => {
       message: "Data news berhasil dirubah",
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    // berikan response error
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
   }
 };
 
@@ -222,7 +209,11 @@ const deleteNewsByIdController = async (req, res) => {
       message: "Data news berhasil dihapus",
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    // berikan response error
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
   }
 };
 
