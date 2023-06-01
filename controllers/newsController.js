@@ -1,6 +1,6 @@
 const News = require("../models").News;
 const { nanoid } = require("nanoid");
-const uploadToImgBB = require("../utils/imageUpload");
+const uploadImageToImgBB = require("../utils/uploadImageToImgBB");
 
 const addNewsController = async (req, res) => {
   try {
@@ -22,7 +22,7 @@ const addNewsController = async (req, res) => {
     // validasi: jika user mengirimkan gambar
     if (gambarPath) {
       // proses upload gambar ke imgbb
-      imageUrl = await uploadToImgBB(gambarPath);
+      imageUrl = await uploadImageToImgBB(gambarPath);
     }
 
     // buat object news
@@ -151,7 +151,7 @@ const editNewsByIdController = async (req, res) => {
     // validasi: jika user meingirimkan gambar
     if (gambarPath) {
       // proses upload gambar ke imgbb
-      imageUrl = await uploadToImgBB(gambarPath);
+      imageUrl = await uploadImageToImgBB(gambarPath);
 
       // object News ketika user mengirimkan gambar
       newNews = {
@@ -178,7 +178,7 @@ const editNewsByIdController = async (req, res) => {
     // berikan response success
     return res.json({
       status: "success",
-      message: "Data berhasil dirubah",
+      message: "Data news berhasil dirubah",
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -214,7 +214,7 @@ const deleteNewsByIdController = async (req, res) => {
     // berikan response success
     return res.json({
       status: "success",
-      message: "News berhasil dihapus",
+      message: "Data news berhasil dihapus",
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

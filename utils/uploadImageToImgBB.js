@@ -3,7 +3,7 @@ const FormData = require("form-data");
 const fs = require("fs");
 const path = require("path");
 
-const uploadToImgBB = async (filePath) => {
+const uploadImageToImgBB = async (filePath) => {
   try {
     // baca gambar
     const image = fs.readFileSync(filePath);
@@ -48,4 +48,4 @@ const deleteImage = (filePath) => {
   });
 };
 
-module.exports = uploadToImgBB;
+module.exports = uploadImageToImgBB;
