@@ -8,18 +8,22 @@ const addNewsController = async (req, res) => {
     const id = nanoid(6);
     const { judul, isi } = req.body;
     const waktu = new Date().toISOString().slice(0, 19).replace("T", " ");
-    const gambarPath = req.file.path;
+    const gambarPath = req.file ? req.file.path : null;
 
     // validasi: jika user tidak mengirimkan data news lengkap
-    if (!judul || !isi || !gambarPath) {
+    if (!judul || !isi) {
       return res.status(400).json({
         status: "error",
-        message: "Mohon untuk semua data judul, isi, dan gambar harus diisi",
+        message: "Mohon untuk semua data judul dan isi harus diisi",
       });
     }
 
-    // kirim gambar ke ImgBB
-    const imageUrl = await uploadToImgBB(gambarPath);
+    let imageUrl = null;
+    // validasi: jika user mengirimkan gambar
+    if (gambarPath) {
+      // proses upload gambar ke imgbb
+      imageUrl = await uploadToImgBB(gambarPath);
+    }
 
     // buat object news
     const news = {
@@ -114,17 +118,16 @@ const editNewsByIdController = async (req, res) => {
   try {
     // mengambil id dari req.params.id
     const id = req.params.id;
-    // const { judul, isi } = req.body;
     const judul = req.body.judul;
     const isi = req.body.isi;
-    const gambarPath = req.file.path;
+    const gambarPath = req.file ? req.file.path : null;
 
     // validasi: jika user tidak mengirimkan data secara lengkap
-    if (!judul || !isi || !gambarPath) {
+    if (!judul || !isi) {
       // berikan response error
       return res.status(400).json({
         status: "error",
-        message: "Mohon untuk semua data judul, isi, dan gambar harus diisi",
+        message: "Mohon untuk semua data judul, dan isi harus diisi",
       });
     }
 
@@ -142,14 +145,28 @@ const editNewsByIdController = async (req, res) => {
       });
     }
 
-    // proses upload gambar ke imgbb
-    const imgUrl = await uploadToImgBB(gambarPath);
+    let imageUrl = null; // Perubahan disini
+    let newNews = {};
 
-    const newNews = {
-      judul,
-      isi,
-      gambar: imgUrl,
-    };
+    // validasi: jika user meingirimkan gambar
+    if (gambarPath) {
+      // proses upload gambar ke imgbb
+      imageUrl = await uploadToImgBB(gambarPath);
+
+      // object News ketika user mengirimkan gambar
+      newNews = {
+        judul,
+        isi,
+        gambar: imageUrl,
+      };
+    } else {
+      // object News ketika user tidak mengirimkan gambar
+      newNews = {
+        judul,
+        isi,
+        gambar: news.gambar,
+      };
+    }
 
     // prosess edit
     await News.update(newNews, {
@@ -163,7 +180,9 @@ const editNewsByIdController = async (req, res) => {
       status: "success",
       message: "Data berhasil dirubah",
     });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 const deleteNewsByIdController = async (req, res) => {
