@@ -1,4 +1,5 @@
 const express = require("express");
+const authenticateTokenMiddleware = require("../middleware/authenticateTokenMiddleware");
 const {
   addNewsController,
   getNewsController,

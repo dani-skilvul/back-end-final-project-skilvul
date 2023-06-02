@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const userRoute = require("./routes/userRoute");
 const newsRoute = require("./routes/newsRoute");
+const tipsRoute = require("./routes/tipsRoute");
 const db = require("./config/db");
 const dotenv = require("dotenv");
 
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(userRoute);
 app.use(newsRoute);
+app.use(tipsRoute);
 
 // cek koneksi db
 (async () => {
