@@ -13,16 +13,26 @@ const newsRoute = express.Router();
 
 newsRoute.post(
   "/api/news",
+  authenticateTokenMiddleware,
   uploadImageMiddleware.single("gambar"),
   addNewsController
 );
-newsRoute.get("/api/news", getNewsController);
-newsRoute.get("/api/news/:id", getNewsByIdController);
+newsRoute.get("/api/news", authenticateTokenMiddleware, getNewsController);
+newsRoute.get(
+  "/api/news/:id",
+  authenticateTokenMiddleware,
+  getNewsByIdController
+);
 newsRoute.put(
   "/api/news/:id",
+  authenticateTokenMiddleware,
   uploadImageMiddleware.single("gambar"),
   editNewsByIdController
 );
-newsRoute.delete("/api/news/:id", deleteNewsByIdController);
+newsRoute.delete(
+  "/api/news/:id",
+  authenticateTokenMiddleware,
+  deleteNewsByIdController
+);
 
 module.exports = newsRoute;

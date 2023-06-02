@@ -10,7 +10,7 @@ const uploadImageToImgBB = async (filePath) => {
 
     // masukkan kedalam form
     const formData = new FormData();
-    formData.append("key", "46d5f93d3e02ce9921ab90d1633fe68f");
+    formData.append("key", process.env.IMGBB_KEY);
     formData.append("image", image, {
       filename: path.basename(filePath),
     });
