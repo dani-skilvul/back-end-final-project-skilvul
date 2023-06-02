@@ -104,7 +104,7 @@ const loginUserController = async (req, res) => {
     }
 
     const token = jwt.sign({ email }, process.env.LOGIN_TOKEN_KEY, {
-      expiresIn: "60s",
+      expiresIn: "6000s",
     });
 
     // berikan response success dan token di header

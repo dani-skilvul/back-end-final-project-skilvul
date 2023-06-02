@@ -87,6 +87,7 @@ const getTipsByIdController = async (req, res) => {
     // berikan response success
     return res.json({
       status: "success",
+      message: "Berhasil mengambil satu tips",
       data: {
         tips,
       },
