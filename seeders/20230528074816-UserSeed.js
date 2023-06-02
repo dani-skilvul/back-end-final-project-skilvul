@@ -7,19 +7,22 @@ module.exports = {
       "Users",
       [
         {
-          email: "john.doe@example.com",
-          nama: "John Doe",
-          password: "abc123",
+          email: "user1@gmail.com",
+          nama: "user1",
+          password:
+            "$2b$10$FTGTo4jtk98yI1IxdiZlTuefTnPKQe5qyPbhg7O8a6evBBi6riPfW", // 123
         },
         {
-          email: "jane.smith@example.com",
-          nama: "Jane Smith",
-          password: "qwerty",
+          email: "user2@gmail.com",
+          nama: "user3",
+          password:
+            "$2b$10$FTGTo4jtk98yI1IxdiZlTuefTnPKQe5qyPbhg7O8a6evBBi6riPfW", // 123
         },
         {
-          email: "ahmad.fauzi@example.com",
-          nama: "Ahmad Fauzi",
-          password: "indonesia123",
+          email: "user3@gmail.com",
+          nama: "user3",
+          password:
+            "$2b$10$FTGTo4jtk98yI1IxdiZlTuefTnPKQe5qyPbhg7O8a6evBBi6riPfW", // 123
         },
       ],
       {}

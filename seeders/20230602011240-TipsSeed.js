@@ -8,23 +8,18 @@ module.exports = {
       [
         {
           id: "tips-3g7s",
-          judul: "Berita Terkini: Penemuan Planet Baru",
-          isi: "Para ilmuwan baru-baru ini menemukan sebuah planet baru di galaksi Andromeda. Planet tersebut memiliki ukuran yang hampir sama dengan Bumi dan diyakini memiliki kondisi yang mendukung kehidupan. Penemuan ini telah mengejutkan komunitas ilmiah di seluruh dunia dan membuka potensi baru dalam pencarian kehidupan di luar Bumi.\n\nPlanet baru tersebut diberi nama Andromeda-1 dan telah menjadi objek penelitian intensif. Para ilmuwan sedang mempelajari atmosfer planet ini, memeriksa kemungkinan adanya tanda-tanda kehidupan mikroba, dan mengumpulkan data lebih lanjut tentang komposisi dan struktur planet. Penemuan ini diharapkan dapat mengubah pemahaman kita tentang alam semesta dan meningkatkan peluang untuk menemukan kehidupan di planet lain.",
+          judul: "Tips Mengurangi Jejak Karbon Anda",
+          isi: "Kurangi Penggunaan Listrik: Matikan peralatan elektronik yang tidak digunakan, gantilah lampu pijar dengan lampu hemat energi, dan pertimbangkan penggunaan panel surya atau energi terbarukan di rumah Anda. \n\nGunakan Transportasi Ramah Lingkungan: Pilihlah berjalan kaki, bersepeda, atau menggunakan transportasi umum jika memungkinkan. Jika Anda harus menggunakan mobil, carilah kendaraan dengan efisiensi bahan bakar yang tinggi atau pertimbangkan mobil listrik. \n\nKurangi Konsumsi Daging: Produksi daging memiliki dampak besar terhadap emisi gas rumah kaca. Cobalah mengurangi konsumsi daging merah dan gantilah dengan sumber protein nabati seperti kacang-kacangan, biji-bijian, dan sayuran.",
         },
         {
           id: "tips-g2ad",
-          judul: "Kisah Inspiratif: Pemuda Berhasil Meraih Emas Olimpiade",
-          isi: "Seorang pemuda berusia 21 tahun berhasil meraih medali emas dalam cabang olahraga renang pada Olimpiade Musim Panas tahun ini. Prestasinya menjadi inspirasi bagi banyak generasi muda di seluruh dunia. Dengan kerja keras, dedikasi, dan semangat juangnya, pemuda tersebut berhasil mengalahkan pesaing-pesaing tangguh dan meraih prestasi tertinggi di ajang olahraga paling bergengsi ini.\n\nPerjalanan menuju medali emas tidaklah mudah. Pemuda ini telah melewati berbagai latihan intensif, cedera, dan pengorbanan pribadi untuk mencapai cita-citanya. Keberhasilannya tidak hanya menginspirasi atlet muda lainnya, tetapi juga mengingatkan kita semua akan pentingnya ketekunan, fokus, dan tekad dalam menghadapi tantangan hidup. Pemuda ini adalah bukti bahwa impian dapat terwujud jika kita memiliki keyakinan dan tekad yang kuat.",
+          judul: "Tips Mengurangi Penggunaan Plastik Sekali Pakai",
+          isi: "Bawa Tas Belanja Sendiri: Selalu siapkan tas belanja kain atau tas ransel yang dapat digunakan kembali ketika berbelanja. Hindari penggunaan kantong plastik sekali pakai di toko. \n\nGunakan Botol Minum dan Wadah Makanan Bawaan: Bawa botol minum dan wadah makanan sendiri saat bepergian. Dengan menghindari penggunaan botol plastik dan kemasan makanan sekali pakai, Anda dapat mengurangi limbah plastik yang dihasilkan. \n\nGunakan Produk Alternatif: Coba cari produk rumah tangga yang tidak menggunakan plastik atau memilih produk yang menggunakan bahan plastik ramah lingkungan, seperti plastik biodegradable atau terbuat dari daur ulang.",
         },
         {
           id: "tips-6eg8",
-          judul: "Teknologi Terbaru: Peluncuran Smartphone Canggih",
-          isi: "Perusahaan teknologi terkemuka mengumumkan peluncuran smartphone terbaru mereka. Smartphone ini dilengkapi dengan fitur-fitur canggih seperti kamera berkualitas tinggi, kecerdasan buatan, dan baterai tahan lama. Dengan desain yang elegan dan performa yang luar biasa, smartphone ini menawarkan pengalaman pengguna yang unik dan memenuhi kebutuhan masyarakat modern.\n\nPeluncuran smartphone ini telah menjadi sorotan media dan banyak penggemar teknologi yang antusias untuk mencobanya. Perusahaan tersebut berharap bahwa inovasi ini akan mengubah cara kita menggunakan teknologi sehari-hari dan membuka jalan bagi perkembangan lebih lanjut dalam industri smartphone.",
-        },
-        {
-          id: "tips-s2ff",
-          judul: "Dunia Fashion: Tren Terbaru Musim Panas",
-          isi: "Industri fashion sedang menghadapi tren terbaru untuk musim panas ini. Pakaian dengan warna-warna cerah dan motif yang segar menjadi sorotan utama. Bahan-bahan ringan dan nyaman digunakan dalam desain pakaian musim panas yang stylish.\n\nSelain itu, aksesori seperti topi lebar, kacamata hitam, dan sandal yang nyaman juga menjadi bagian penting dalam menambahkan sentuhan gaya pada penampilan. Desainer terkemuka telah merilis koleksi terbaru mereka yang mengikuti tren ini, memberikan inspirasi bagi pecinta fashion untuk mengeksplorasi gaya pribadi mereka dalam menghadapi musim panas yang cerah dan hangat.",
+          judul: "Tips Menjaga Keseimbangan Ekosistem",
+          isi: "Dukung Pertanian Organik: Pilihlah makanan yang berasal dari pertanian organik atau lokal yang menggunakan metode pertanian berkelanjutan tanpa penggunaan pestisida dan pupuk kimia berlebihan. \n\nTanam Pohon dan Tumbuhan: Tanam pohon dan tanaman di sekitar rumah Anda atau ikut serta dalam program penanaman pohon. Tumbuhan berperan penting dalam menjaga keberlanjutan ekosistem dan mengurangi kadar karbon dioksida di atmosfer. \n\nDaur Ulang dan Mendaur Ulang: Lakukan praktik daur ulang dengan memisahkan sampah organik dan non-organik. Selain itu, coba untuk mendaur ulang barang-barang seperti kertas, kaca, dan plastik untuk mengurangi limbah dan penggunaan sumber daya alam.",
         },
       ],
       {}
